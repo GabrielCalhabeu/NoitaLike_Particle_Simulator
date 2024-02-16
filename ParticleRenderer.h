@@ -20,6 +20,7 @@ public:
     // Function to draw all sand particles
     void drawSandParticles();
     void ClearRenderer();
+    void clearMemory();
 };
 
 #endif // PARTICLE_RENDERER_H

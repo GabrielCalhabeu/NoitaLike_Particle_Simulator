@@ -3,7 +3,7 @@
 
 // Constructor
 Sand::Sand(int x, int y) : xPosition(x), yPosition(y){
-    std::cout << "Sand object created at position (" << xPosition << ", " << yPosition << ") with color (" << r << ", " << g << ", " << b << ", " << a << ")" << std::endl;
+    std::cout << "Sand object created at position (" << xPosition << ", " << yPosition << ")" << std::endl;
 }
 
 // Destructor
@@ -11,9 +11,17 @@ Sand::~Sand() {
     std::cout << "Sand object destroyed" << std::endl;
 }
 
-void Sand::Simulate()
+Sand::color_t Sand::getColor() const
 {
+    return color;
+}
 
+ParticleType Sand::getType() const {
+    return type;
+}
+
+void Sand::setType(ParticleType newType) {
+    type = newType;
 }
 
 // Getter for xPosition

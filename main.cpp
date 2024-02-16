@@ -6,8 +6,6 @@ int main(int argc, char* argv[])
 	// Variable to control the main loop
 	bool running = true;
 
-
-
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		// Error initializing SDL

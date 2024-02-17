@@ -3,14 +3,14 @@
 // Constructor
 ParticleRenderer::ParticleRenderer(SDL_Renderer* renderer) : renderer(renderer) {}
 
-// Function to add a sand particle
-void ParticleRenderer::addSandParticle(Sand* sand) {
-    sandParticles.push_back(sand);
+// Function to add a particle particle
+void ParticleRenderer::addParticle(Particle* particle) {
+    particles.push_back(particle);
 }
 
 void ParticleRenderer::clearMemory()
 {
-    sandParticles.clear();
+    particles.clear();
 }
 void ParticleRenderer::ClearRenderer()
 {
@@ -19,20 +19,21 @@ void ParticleRenderer::ClearRenderer()
     return;
 }
 
-// Function to draw all sand particles
-void ParticleRenderer::drawSandParticles() {
-    // Set sand color
+// Function to draw all particle particles
+void ParticleRenderer::drawParticles() {
+    // Set particle color
     ClearRenderer();
-    if (sandParticles.size() == 0)
+    if (particles.size() == 0)
     {
         return;
     }
-    SDL_SetRenderDrawColor(renderer, sandParticles[0]->getColor().r, sandParticles[0]->getColor().g, sandParticles[0]->getColor().b, 0); // Example color: Yellow
 
-    // Draw each sand particle
-    for (const Sand *sand : sandParticles) {
-        if(sand != NULL)
-            SDL_RenderDrawPoint(renderer, sand->getXPosition(), sand->getYPosition());
+
+    // Draw each particle particle
+    for (const Particle *particle : particles) {
+        if(particle != NULL)
+            SDL_SetRenderDrawColor(renderer, particle->getColor().r, particle->getColor().g, particle->getColor().b, 0); // Example color: Yellow
+            SDL_RenderDrawPoint(renderer, particle->getXPosition(), particle->getYPosition());
     }
 
 

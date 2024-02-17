@@ -3,7 +3,7 @@
 #define PHY_SIM_H
 
 
-#include "Sand.h"
+#include "Particle.h"
 #include "Display.h"
 #include "SDL.h"
 #include <iostream>
@@ -13,10 +13,15 @@ class PhysicsSimulator
 private:
 
 	int gravity;
-
-	std::vector<Sand*> sandList;
 	bool isCellEmpty(int x, int y) const;
-	void moveSand(Sand* sand, int newX, int newY);
+	bool isCellWater(int x, int y) const;
+
+	void moveParticle(Particle* particle, int newX, int newY);
+
+	void simulateSand(Particle* p1, int x, int y);
+	void simulateWater(Particle* p1, int x, int y);
+
+	
 
 	int width = Display::xResolution / Display::largeScaling;
 	int height = Display::yResolution / Display::largeScaling;
@@ -24,7 +29,7 @@ private:
 public:
 	typedef struct particle_pointer_t
 	{
-		Sand* sand = NULL;
+		Particle* particle = NULL;
 	}particle_pointer_t;
 
 	particle_pointer_t*** particleArray = new particle_pointer_t **[Display::xResolution/Display::largeScaling];
@@ -34,11 +39,12 @@ public:
 	void reinitializeParticleArray();
 
 	void simulateAndDraw(SDL_Renderer *renderer);
-	void simulateSand(Sand* p1, int x, int y);
+
+
 	void Simulate();
 
 	int getGravity() const;
-	void addSand(Sand* sand);
+	void addParticle(Particle* particle);
 	
 };
 

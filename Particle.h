@@ -1,5 +1,5 @@
-#ifndef SAND_H
-#define SAND_H
+#ifndef PARTICLE_H
+#define PARTICLE_H
 #include <iostream>
 // Define a struct for representing a color in RGBA format
 enum class ParticleType {
@@ -8,8 +8,8 @@ enum class ParticleType {
     // Add more particle types as needed
 };
 
-// Define Sand class
-class Sand {
+// Define Particle class
+class Particle {
     typedef struct color_t {
         int r; int b; int g; int a;
     }color_t;
@@ -24,10 +24,10 @@ class Sand {
        
         
         // Constructor
-        Sand(int x, int y);
+        Particle(int x, int y, ParticleType type);
 
         // Destructor
-        ~Sand();
+        ~Particle();
 
         void Simulate();
 
@@ -49,4 +49,4 @@ class Sand {
 
 };
 
-#endif // SAND_H
+#endif // PARTICLE_H

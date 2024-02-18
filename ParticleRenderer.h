@@ -13,7 +13,7 @@ private:
 public:
     // Constructor
     ParticleRenderer(SDL_Renderer* renderer);
-
+ 
     // Function to add a sand particle
     void addParticle(Particle* particle);
 

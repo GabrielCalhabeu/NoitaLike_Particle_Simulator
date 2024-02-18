@@ -1,30 +1,32 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 #include <iostream>
+#include <cstdint>
 // Define a struct for representing a color in RGBA format
 enum class ParticleType {
     Sand,
     Water,
+    Dirt,
     // Add more particle types as needed
 };
 
 // Define Particle class
 class Particle {
     typedef struct color_t {
-        int r; int b; int g; int a;
+        uint8_t r; uint8_t b; uint8_t g; uint8_t a;
     }color_t;
     private:
-        int xPosition;
-        int yPosition;
+        uint16_t xPosition;
+        uint16_t yPosition;
         ParticleType type;
         color_t color;
 
-        int has_updated;
+      
     public:
        
-        
+        bool has_updated;
         // Constructor
-        Particle(int x, int y, ParticleType type);
+        Particle(uint16_t x, uint16_t y, ParticleType type);
 
         // Destructor
         ~Particle();

@@ -20,7 +20,7 @@ private:
 
 	void simulateSand(Particle* p1, int x, int y);
 	void simulateWater(Particle* p1, int x, int y);
-
+	void swapParticles(Particle* particle1, Particle* particle2);
 	
 
 	int width = Display::xResolution / Display::largeScaling;

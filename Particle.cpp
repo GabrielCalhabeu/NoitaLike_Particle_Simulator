@@ -2,9 +2,10 @@
 
 
 // Constructor
-Particle::Particle(int x, int y, ParticleType n_type) : xPosition(x), yPosition(y){
+Particle::Particle(uint16_t x, uint16_t y, ParticleType n_type) : xPosition(x), yPosition(y){
     //std::cout << "Particle object created at position (" << xPosition << ", " << yPosition << ")" << std::endl;
     type = n_type;
+    has_updated = true;
     switch (n_type)
     {
     case (ParticleType::Sand):
@@ -18,6 +19,12 @@ Particle::Particle(int x, int y, ParticleType n_type) : xPosition(x), yPosition(
         color.g = 204;   // Green component for water color
         color.b = 255; // Blue component for water color
         color.a = 240; // Alpha component (opacity)
+        break;
+    case (ParticleType::Dirt):
+        color.r = 139; // Red component for water color
+        color.g = 69;   // Green component for water color
+        color.b = 19; // Blue component for water color
+        color.a = 255; // Alpha component (opacity)
         break;
     default:
         color.r = 255; // Default color (white)

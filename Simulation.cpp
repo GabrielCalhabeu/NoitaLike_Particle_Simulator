@@ -1,14 +1,12 @@
 #include "Simulation.h"
 
-//TODO: Still have to change the reference so that simulation and renderer use a singular reference to the particle vector.
-//TODO: Introduce particle pooling for better performance?
-//TODO: Better water logic, as it will accumulate on the left instead of evenly spread out.
-//TODO: Make sand sink down in water instead of floating above it.
+//TODO: Introduce particle batching for the renderer. Current performance is heavily affected by the renderer (use SDL_RenderPoints)
+//TODO: Better water logic, make it so it wont teleport to the top of sand
 
 // Function to spawn a cluster of particles around the given position (x, y)
 void Simulation::spawnParticleCluster(int x, int y, ParticleType particleType, int clusterSize, float spawnChance, std::vector<Particle*>& particleVector, PhysicsSimulator& phySimulator, ParticleRenderer& particleRenderer) {
     // Seed the random number generator with the current time
-    std::srand(std::time(nullptr));
+    std::srand(std::time(0));
 
     // Define the size of the cluster (e.g., 3x3 square)
     int clusterRadius = clusterSize / 2;
@@ -111,6 +109,10 @@ void Simulation::Run() {
                         // select Water
                         selectedParticleType = ParticleType::Water;
                     }
+                    else if (e.key.keysym.sym == SDLK_d) {
+                        // select Water
+                        selectedParticleType = ParticleType::Dirt;
+                    }
                     break;
                 default:
                     // Other event types not handled
@@ -141,7 +143,7 @@ void Simulation::Run() {
                         //I dont remember the point of this if statement, but without it will crash
                         if (phySimulator.particleArray[posX][posY]->particle == nullptr)
                         {
-                            spawnParticleCluster(posX, posY, selectedParticleType, 16, .1, particleVector, phySimulator, particleRenderer);
+                            spawnParticleCluster(posX, posY, selectedParticleType, 3, 1, particleVector, phySimulator, particleRenderer);
                         }
 
                     }

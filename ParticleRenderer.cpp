@@ -28,12 +28,13 @@ void ParticleRenderer::drawParticles() {
         return;
     }
 
-
+    //SDL_Point *points = new SDL_Point;
     // Draw each particle particle
     for (const Particle *particle : particles) {
-        if(particle != NULL)
-            SDL_SetRenderDrawColor(renderer, particle->getColor().r, particle->getColor().g, particle->getColor().b, 0); // Example color: Yellow
+        if (particle != nullptr) {
+            SDL_SetRenderDrawColor(renderer, particle->getColor().r, particle->getColor().g, particle->getColor().b, particle->getColor().a); // Example color: Yellow
             SDL_RenderDrawPoint(renderer, particle->getXPosition(), particle->getYPosition());
+        }
     }
 
 

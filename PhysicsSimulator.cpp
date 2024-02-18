@@ -66,6 +66,32 @@ void PhysicsSimulator::moveParticle(Particle* particle, int newX, int newY) {
 	particleArray[newX][newY]->particle = particle;
 	particle->setXPosition(newX);
 	particle->setYPosition(newY);
+
+}
+
+// Helper function to move a particle particle to a new position
+void PhysicsSimulator::swapParticles(Particle* particle1, Particle* particle2) {
+	if (particle1 == nullptr || particle2 == nullptr) return; // Null pointer check
+
+	// Swap the particles' positions in the grid
+	 // Get the positions of the particles
+	int x1 = particle1->getXPosition();
+	int y1 = particle1->getYPosition();
+	int x2 = particle2->getXPosition();
+	int y2 = particle2->getYPosition();
+	// Get temporary pointer to particle1
+	Particle* temp = particle1;
+	// Swap the particles' positions in the grid
+	particleArray[x1][y1]->particle = particle2;
+	particleArray[x2][y2]->particle = temp;
+
+	// Update the particles' positions
+	temp->setXPosition(x2);
+	temp->setYPosition(y2);
+	particle2->setXPosition(x1);
+	particle2->setYPosition(y1);
+	
+
 }
 
 //This is extremely inneficient for big resolutions as it will produce less than 10 frames when at full HD
@@ -85,6 +111,10 @@ void PhysicsSimulator::Simulate() {
 					// Simulate behavior for water particles
 					simulateWater(p1, x, y);
 					break;
+				case ParticleType::Dirt:
+					break;
+				default:
+						break;
 					// Handle other particle types
 				}
 			}
@@ -92,6 +122,7 @@ void PhysicsSimulator::Simulate() {
 	}
 }
 void PhysicsSimulator::simulateSand(Particle* p1, int x, int y) {
+	
 	//Function for simulating sand particle
 	if (p1 != nullptr) {
 		// Check if this is the bottom of the screen
@@ -99,15 +130,35 @@ void PhysicsSimulator::simulateSand(Particle* p1, int x, int y) {
 			// Try to go down immediately
 			if (isCellEmpty(x, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x, p1->getYPosition() + gravity);
+		
 			}
-			// Try going left
+			else if (isCellWater(x, p1->getYPosition() + gravity))
+			{
+				swapParticles(p1, particleArray[x][p1->getYPosition() + gravity]->particle);
+	
+			}
+			// Try going left if empty
 			else if (isCellEmpty(x - 1, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x - 1, p1->getYPosition() + gravity);
+			
 			}
-			// Try going right
+			// Try going left if water
+			else if (isCellWater(x - 1, p1->getYPosition() + gravity)) {
+				swapParticles(p1, particleArray[x - 1][p1->getYPosition() + gravity]->particle);
+			
+			}
+			// Try going right if empty
 			else if (isCellEmpty(x + 1, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x + 1, p1->getYPosition() + gravity);
+				
 			}
+			// Try going right if water
+			else if (isCellWater(x + 1, p1->getYPosition() + gravity)) {
+				swapParticles(p1, particleArray[x + 1][p1->getYPosition() + gravity]->particle);
+				
+			}
+			
+
 		}
 	}	
 }
@@ -121,22 +172,26 @@ void PhysicsSimulator::simulateWater(Particle* p1, int x, int y) {
 			if (isCellEmpty(x, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x, p1->getYPosition() + gravity);
 			}
+
 			// Try going left and down
 			else if (isCellEmpty(x - 1, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x - 1, p1->getYPosition() + gravity);
 			}
+
 			// Try going right and down
 			else if (isCellEmpty(x + 1, p1->getYPosition() + gravity)) {
 				moveParticle(p1, x + 1, p1->getYPosition() + gravity);
+			}
+			
+			// Try going righ
+			else if (isCellEmpty(x + 1, p1->getYPosition())) {
+				moveParticle(p1, x + 1, p1->getYPosition());
 			}
 			// Try going left 
 			else if ( isCellEmpty(x - 1, p1->getYPosition()) ) {
 				moveParticle(p1, x - 1, p1->getYPosition() );
 			}
-			// Try going righ
-			else if ( isCellEmpty(x + 1, p1->getYPosition()) ) {
-				moveParticle(p1, x + 1, p1->getYPosition());
-			}
+			
 		}
 	}
 }

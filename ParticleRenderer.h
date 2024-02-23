@@ -4,12 +4,13 @@
 #include <vector>
 #include "SDL.h" // Assuming SDL is needed for rendering
 #include "Particle.h" // Assuming Sand class is defined in Sand.h
+#include "Display.h"
 
 class ParticleRenderer {
 private:
     SDL_Renderer* renderer;
     std::vector<Particle*> particles;
-
+    
 public:
     // Constructor
     ParticleRenderer(SDL_Renderer* renderer);

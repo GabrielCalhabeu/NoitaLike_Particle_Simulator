@@ -18,7 +18,7 @@ Particle::Particle(uint16_t x, uint16_t y, ParticleType n_type) : xPosition(x), 
         color.r = 102;   // Red component for water color
         color.g = 204;   // Green component for water color
         color.b = 255; // Blue component for water color
-        color.a = 240; // Alpha component (opacity)
+        color.a = 100; // Alpha component (opacity)
         break;
     case (ParticleType::Dirt):
         color.r = 139; // Red component for water color
@@ -35,10 +35,7 @@ Particle::Particle(uint16_t x, uint16_t y, ParticleType n_type) : xPosition(x), 
     }
 }
 
-// Destructor
-Particle::~Particle() {
-    //std::cout << "Particle object destroyed" << std::endl;
-}
+
 
 Particle::color_t Particle::getColor() const
 {

@@ -155,10 +155,10 @@ void Simulation::Run() {
 
             //The point of this is to set the framerate to 60, so i get the frametime and try to make it 16.667.
             float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-            if (elapsedMS < 16.667f)
-                SDL_Delay(16.667f - elapsedMS);
+            if (elapsedMS < 1.667f)
+                SDL_Delay(1.667f - elapsedMS);
             else
-                SDL_Delay(16.66f);
+                SDL_Delay(1.66f);
 
 
             end = SDL_GetPerformanceCounter(); // End performance counter

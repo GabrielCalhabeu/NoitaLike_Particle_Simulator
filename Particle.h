@@ -29,9 +29,7 @@ class Particle {
         Particle(uint16_t x, uint16_t y, ParticleType type);
 
         // Destructor
-        ~Particle();
-
-        void Simulate();
+        ~Particle() = default;
 
         // Getter for xPosition
         int getXPosition() const;

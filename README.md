@@ -2,11 +2,15 @@
 
 Particle "simulator" inspired by the game Noita where different types of particles have different behavior.
 
-Sand will fall and pile up
+The current implementation uses the SDL library for graphics and C++. Possible further work may include switching from SDL to OpenGL.
 
-Water will fall and try to fill the area it is in until it is level.
+Press S for Sand will fall and pile up
 
-Dirt will stay in the same place and act as a solid particle.
+W - Water will fall and try to fill the area it is in until it is level.
+
+D - Dirt will stay in the same place and act as a solid particle.
+
+And left mouse button to place the particle down at the position of the pointer. Space will clean everything and restart from a blank.
 
 Currently, some optimizations may be in order, such as quadtree search for active particles to compute, and parallel chunk computation.
 

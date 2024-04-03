@@ -10,7 +10,7 @@ Dirt will stay in the same place and act as a solid particle.
 
 Currently, some optimizations may be in order, such as quadtree search for active particles to compute, and parallel chunk computation.
 
-<imgs src=noita_example.png>
+<img src=noita_example.png style="width:480px;height:360px;">
 
 
 
